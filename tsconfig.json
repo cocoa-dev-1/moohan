@@ -9,7 +9,7 @@
     "allowSyntheticDefaultImports": true,
 
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": false,
+    "emitDecoratorMetadata": true,
 
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true

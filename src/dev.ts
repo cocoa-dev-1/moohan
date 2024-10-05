@@ -1,15 +1,17 @@
 import { dirname, resolve } from "@discordx/importer";
 import chokidar from "chokidar";
 import { DIService, MetadataStorage } from "discordx";
-
 import { bot } from "./bot.js";
+import { configDotenv } from "dotenv";
+
+configDotenv();
 
 // The following syntax should be used in the commonjs environment
 // const importPattern =  __dirname + "/{events,commands}/**/*.{ts,js}"
 
 // The following syntax should be used in the ECMAScript environment
 const importPattern = `${dirname(
-  import.meta.url,
+  import.meta.url
 )}/{events,commands}/**/*.{ts,js}`;
 
 /**
@@ -22,7 +24,7 @@ const importPattern = `${dirname(
 export async function LoadFiles(src: string): Promise<void> {
   const files = await resolve(src);
   await Promise.all(
-    files.map((file) => import(`${file}?version=${Date.now().toString()}`)),
+    files.map((file) => import(`${file}?version=${Date.now().toString()}`))
   );
 }
 
@@ -70,7 +72,7 @@ async function run() {
   // Hot Module reload
   if (process.env.NODE_ENV !== "production") {
     console.log(
-      "> Hot-Module-Reload enabled in development. Commands will automatically reload.",
+      "> Hot-Module-Reload enabled in development. Commands will automatically reload."
     );
 
     // Watch changed files using chikidar

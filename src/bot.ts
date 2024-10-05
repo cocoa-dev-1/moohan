@@ -1,6 +1,12 @@
+import "reflect-metadata";
 import type { Interaction, Message } from "discord.js";
 import { IntentsBitField } from "discord.js";
-import { Client } from "discordx";
+import { Client, DIService, typeDiDependencyRegistryEngine } from "discordx";
+import { Container, Service } from "typedi";
+
+DIService.engine = typeDiDependencyRegistryEngine
+  .setInjector(Container)
+  .setService(Service);
 
 export const bot = new Client({
   // To use only guild command
@@ -21,7 +27,7 @@ export const bot = new Client({
 
   // Configuration for @SimpleCommand
   simpleCommand: {
-    prefix: "!",
+    prefix: "무한아",
   },
 });
 

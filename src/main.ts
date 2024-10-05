@@ -1,6 +1,9 @@
 import { dirname, importx } from "@discordx/importer";
 
 import { bot } from "./bot.js";
+import { configDotenv } from "dotenv";
+
+configDotenv();
 
 async function run() {
   // The following syntax should be used in the commonjs environment
