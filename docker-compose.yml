@@ -1,7 +1,6 @@
 version: "3"
 services:
   app:
-    build: .
-    command: node build/main.js
-    environment:
-      - BOT_TOKEN=${BOT_TOKEN}
+    image: eatcocoa/moohan:0.0.1
+    env_file:
+      - .env
