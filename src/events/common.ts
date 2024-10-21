@@ -13,11 +13,16 @@ export class Example {
     let messageContent: string | null = null;
     if (args[0] === "지피티") {
       messageContent = args.slice(1).join(" ");
-    } else if (message.channelId === process.env.CHAT_CHANNEL_ID) {
+    } else if (
+      message.channelId === process.env.CHAT_CHANNEL_ID &&
+      !message.author.bot
+    ) {
       messageContent = message.content;
     } else {
       return;
     }
+
+    if (messageContent === null) return;
 
     const response = await this.chatService.getChatResponse(messageContent);
     if (response) {
