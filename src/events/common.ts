@@ -9,9 +9,16 @@ export class Example {
   @On()
   async messageCreate([message]: ArgsOf<"messageCreate">) {
     const args = message.content.split(" ");
-    if (args[0] !== "지피티") return;
 
-    const messageContent = args.slice(1).join(" ");
+    let messageContent: string | null = null;
+    if (args[0] === "지피티") {
+      messageContent = args.slice(1).join(" ");
+    } else if (message.channelId === process.env.CHAT_CHANNEL_ID) {
+      messageContent = message.content;
+    } else {
+      return;
+    }
+
     const response = await this.chatService.getChatResponse(messageContent);
     if (response) {
       await message.reply(response);
