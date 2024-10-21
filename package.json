@@ -17,6 +17,7 @@
     "dotenv": "^16.4.5",
     "luxon": "^3.5.0",
     "node-html-better-parser": "^1.4.7",
+    "openai": "^4.68.1",
     "reflect-metadata": "^0.2.2",
     "typedi": "^0.10.0"
   },
