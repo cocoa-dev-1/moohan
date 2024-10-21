@@ -26,9 +26,26 @@ export class Example {
 
     const response = await this.chatService.getChatResponse(messageContent);
     if (response) {
-      await message.reply(response);
+      const messages = this.splitMessage(response);
+      for (const msg of messages) {
+        await message.reply(msg);
+      }
     } else {
       await message.reply("대답 실패");
     }
+  }
+
+  private splitMessage(message: string): string[] {
+    const messages = [];
+    let currentMessage = "";
+    for (const word of message.split(" ")) {
+      if (currentMessage.length + word.length > 2000) {
+        messages.push(currentMessage);
+        currentMessage = "";
+      }
+      currentMessage += word + " ";
+    }
+    messages.push(currentMessage);
+    return messages;
   }
 }
