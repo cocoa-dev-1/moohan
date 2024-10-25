@@ -13,15 +13,13 @@ export class ChatService {
     });
   }
 
-  async getChatResponse(message: string): Promise<string | null> {
+  async getChatResponse(
+    chat: { role: "user" | "assistant"; content: string }[]
+  ): Promise<string | null> {
+    console.log(chat);
     const res = await this.client.chat.completions.create({
       model: this.defaultChatModel,
-      messages: [
-        {
-          role: "user",
-          content: message,
-        },
-      ],
+      messages: chat,
     });
 
     return res.choices[0].message.content;
