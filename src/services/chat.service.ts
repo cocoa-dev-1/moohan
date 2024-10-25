@@ -16,7 +16,6 @@ export class ChatService {
   async getChatResponse(
     chat: { role: "user" | "assistant"; content: string }[]
   ): Promise<string | null> {
-    console.log(chat);
     const res = await this.client.chat.completions.create({
       model: this.defaultChatModel,
       messages: [
