@@ -3,6 +3,7 @@ import chokidar from "chokidar";
 import { DIService, MetadataStorage } from "discordx";
 import { bot } from "./bot.js";
 import { configDotenv } from "dotenv";
+import "@discordx/plugin-lava-player";
 
 configDotenv();
 

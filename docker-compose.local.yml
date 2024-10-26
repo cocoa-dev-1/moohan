@@ -1,7 +1,7 @@
 version: "3"
 services:
   app:
-    image: eatcocoa/moohan:latest
+    image: moohan:dev-latest
     extra_hosts:
       - "host.docker.internal:host-gateway"
     env_file:
@@ -23,9 +23,9 @@ services:
       LAVALINK_SERVER_PASSWORD: ${LAVA_PASSWORD}
     volumes:
       # mount application.yml from the same directory or use environment variables
-      - ./application.yml:./opt/lavalink/application.yml
+      - ./opt/lavalink/application.yml:/opt/Lavalink/application.yml
       # persist plugins between restarts, make sure to set the correct permissions (user: 322, group: 322)
-      - ./plugins/:./opt/lavalink/plugins/
+      - ./opt/lavalink/plugins/:/opt/Lavalink/plugins/
     extra_hosts:
       - "host.docker.internal:host-gateway"
     networks:
@@ -33,9 +33,9 @@ services:
     expose:
       # lavalink exposes port 2333 to connect to for other containers (this is for documentation purposes only)
       - 2333
-    # ports:
-    #   # you only need this if you want to make your lavalink accessible from outside of containers
-    #   - "2333:2333"
+    ports:
+      # you only need this if you want to make your lavalink accessible from outside of containers
+      - "2333:2333"
 
 networks:
   # create a lavalink network you can add other containers to, to give them access to Lavalink

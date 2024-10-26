@@ -1,4 +1,5 @@
 import { dirname, importx } from "@discordx/importer";
+import "@discordx/plugin-lava-player";
 
 import { bot } from "./bot.js";
 import { configDotenv } from "dotenv";
