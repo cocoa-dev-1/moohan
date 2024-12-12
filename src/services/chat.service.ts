@@ -1,4 +1,5 @@
 import OpenAI from "openai";
+import { ChatCompletionMessageParam } from "openai/resources";
 import { Service } from "typedi";
 
 @Service()
@@ -14,7 +15,7 @@ export class ChatService {
   }
 
   async getChatResponse(
-    chat: { role: "user" | "assistant"; content: string }[]
+    chat: ChatCompletionMessageParam[]
   ): Promise<string | null> {
     const res = await this.client.chat.completions.create({
       model: this.defaultChatModel,

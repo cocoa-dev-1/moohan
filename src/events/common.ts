@@ -2,6 +2,10 @@ import type { ArgsOf } from "discordx";
 import { Discord, On } from "discordx";
 import { ChatService } from "../services/chat.service.js";
 import { Message } from "discord.js";
+import {
+  ChatCompletionContentPart,
+  ChatCompletionMessageParam,
+} from "openai/resources/index.js";
 
 @Discord()
 export class Example {
@@ -30,8 +34,25 @@ export class Example {
     const pastMessages = await this.findAllPastMessages(message);
     const postChat = this.convertToChat(pastMessages);
 
-    const chatToSend: { role: "assistant" | "user"; content: string }[] = [
+    const chatToSend: ChatCompletionMessageParam[] = [
       { role: "user", content: messageContent },
+      {
+        role: "user",
+        content: [
+          ...message.attachments
+            .filter((attachment) =>
+              ["image/gif", "image/png", "image/jpeg", "image/webp"].includes(
+                attachment.contentType ?? ""
+              )
+            )
+            .map<ChatCompletionContentPart>((attachment) => ({
+              type: "image_url",
+              image_url: {
+                url: attachment.url,
+              },
+            })),
+        ],
+      },
       ...postChat,
     ];
 
