@@ -4,7 +4,7 @@ import { Service } from "typedi";
 
 @Service()
 export class ChatService {
-  private readonly defaultChatModel = "gpt-4o";
+  private readonly defaultChatModel = "gpt-5-search-api";
   private readonly client: OpenAI;
 
   constructor() {
